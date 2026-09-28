@@ -1,0 +1,652 @@
+// ============================================================
+// 全局样式入口（main.js 中在 element-variables.scss 之后引入）
+// 包含：CSS 变量、基础重置、Element-UI 视觉细节覆写、通用布局工具类
+// ============================================================
+
+/* ---------- 1. 设计 Token 的运行时 CSS 变量 ---------- */
+:root {
+  --wms-bg: #{$wms-bg};
+  --wms-panel: #{$wms-panel};
+  --wms-panel-2: #{$wms-panel-2};
+  --wms-panel-3: #{$wms-panel-3};
+  --wms-border: #{$wms-border};
+  --wms-border-strong: #{$wms-border-strong};
+  --wms-text: #{$wms-text};
+  --wms-text-2: #{$wms-text-2};
+  --wms-text-3: #{$wms-text-3};
+  --wms-brand: #{$wms-brand};
+  --wms-brand-hover: #{$wms-brand-hover};
+  --wms-brand-soft: #{$wms-brand-soft};
+  --wms-ok: #{$wms-ok};
+  --wms-ok-soft: #{$wms-ok-soft};
+  --wms-warn: #{$wms-warn};
+  --wms-warn-soft: #{$wms-warn-soft};
+  --wms-danger: #{$wms-danger};
+  --wms-danger-soft: #{$wms-danger-soft};
+  --wms-info: #{$wms-info};
+  --wms-info-soft: #{$wms-info-soft};
+  --wms-neutral: #{$wms-neutral};
+  --wms-neutral-soft: #{$wms-neutral-soft};
+  --wms-nav-bg: #{$wms-nav-bg};
+  --wms-nav-hover: #{$wms-nav-hover};
+  --wms-nav-active: #{$wms-nav-active};
+  --wms-nav-text: #{$wms-nav-text};
+  --wms-nav-muted: #{$wms-nav-muted};
+  --wms-nav-active-text: #{$wms-nav-active-text};
+  --wms-nav-accent: #{$wms-nav-accent};
+  --wms-nav-border: #{$wms-nav-border};
+  --wms-radius: #{$wms-radius};
+  --wms-radius-md: #{$wms-radius-md};
+  --wms-font-body: #{$wms-font-body};
+  --wms-font-heading: #{$wms-font-heading};
+  --wms-sidebar-width: #{$wms-sidebar-width};
+  --wms-header-height: #{$wms-header-height};
+}
+
+/* ---------- 2. 基础重置 ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: $wms-bg;
+  color: $wms-text;
+  font-family: $wms-font-body;
+  font-size: $wms-fs-base;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: $wms-font-heading;
+  font-weight: 600;
+  color: $wms-text;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: $wms-brand;
+  text-decoration: none;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $wms-border-strong;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 3. Element-UI 视觉细节覆写 ---------- */
+.el-button {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-base;
+  font-weight: 500;
+  border-radius: $wms-radius;
+  padding: 0 14px;
+  height: 32px;
+  line-height: 30px;
+  transition: all 0.15s ease;
+
+  + .el-button {
+    margin-left: $wms-gap;
+  }
+}
+
+.el-button--primary {
+  background: $wms-brand;
+  border-color: $wms-brand;
+  color: $wms-brand-ink;
+
+  &:hover,
+  &:focus {
+    background: $wms-brand-hover;
+    border-color: $wms-brand-hover;
+  }
+}
+
+.el-button--default {
+  background: $wms-panel;
+  border-color: $wms-border-strong;
+  color: $wms-text;
+
+  &:hover,
+  &:focus {
+    background: $wms-panel-3;
+    border-color: $wms-brand;
+    color: $wms-brand;
+  }
+}
+
+.el-button--text {
+  height: auto;
+  line-height: 1;
+  padding: 0;
+  color: $wms-brand;
+  font-weight: 500;
+
+  &:hover,
+  &:focus {
+    color: $wms-brand-hover;
+  }
+
+  &.is-danger,
+  &.wms-text-danger {
+    color: $wms-danger;
+  }
+}
+
+.el-button--small {
+  height: 28px;
+  line-height: 26px;
+  font-size: $wms-fs-sm;
+  padding: 0 10px;
+  border-radius: $wms-radius-sm;
+}
+
+.el-button--mini {
+  height: 24px;
+  line-height: 22px;
+  font-size: $wms-fs-11;
+  padding: 0 8px;
+  border-radius: $wms-radius-sm;
+}
+
+/* 输入框 / 选择器 */
+.el-input__inner,
+.el-textarea__inner {
+  height: 32px;
+  line-height: 32px;
+  border-radius: $wms-radius;
+  border-color: $wms-border;
+  background: $wms-panel;
+  color: $wms-text;
+  font-family: $wms-font-body;
+  font-size: $wms-fs-base;
+
+  &::placeholder {
+    color: $wms-text-3;
+  }
+
+  &:hover {
+    border-color: $wms-border-strong;
+  }
+}
+
+.el-textarea__inner {
+  height: auto;
+  line-height: 1.6;
+  padding: 6px 10px;
+}
+
+.el-input--small .el-input__inner {
+  height: 28px;
+  line-height: 28px;
+  font-size: $wms-fs-sm;
+}
+
+.el-input__icon,
+.el-input__prefix,
+.el-input__suffix {
+  line-height: 32px;
+  color: $wms-text-3;
+}
+
+.el-select .el-input.is-focus .el-input__inner,
+.el-input__inner:focus {
+  border-color: $wms-brand;
+}
+
+.el-form-item {
+  margin-bottom: 16px;
+}
+
+.el-form-item__label {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-125;
+  color: $wms-text-2;
+  font-weight: 500;
+  line-height: 32px;
+  padding-right: $wms-gap;
+}
+
+.el-form-item__error {
+  font-size: $wms-fs-11;
+  color: $wms-danger;
+  padding-top: 2px;
+}
+
+/* 表格 */
+.el-table {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-base;
+  color: $wms-text;
+  background: transparent;
+
+  &::before {
+    display: none;
+  }
+
+  th.el-table__cell {
+    background: $wms-panel-2;
+    color: $wms-text-2;
+    font-weight: 500;
+    font-size: $wms-fs-sm;
+    height: 40px;
+    padding: 0;
+
+    .cell {
+      padding: 0 14px;
+      font-weight: 500;
+    }
+  }
+
+  td.el-table__cell {
+    height: 48px;
+    padding: 0;
+    border-bottom-color: $wms-border;
+
+    .cell {
+      padding: 0 14px;
+      line-height: 1.4;
+    }
+  }
+
+  tr:hover > td.el-table__cell {
+    background: $wms-panel-3;
+  }
+
+  .el-table__body tr.current-row > td.el-table__cell {
+    background: $wms-brand-soft;
+  }
+
+  .el-table__empty-block {
+    background: $wms-panel;
+  }
+
+  .el-table__empty-text {
+    color: $wms-text-3;
+    font-size: $wms-fs-sm;
+  }
+}
+
+.el-table--border {
+  border-color: $wms-border;
+}
+
+/* 分页 */
+.el-pagination {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-125;
+  color: $wms-text-2;
+  padding: 0;
+
+  .el-pagination__total,
+  .el-pagination__jump {
+    color: $wms-text-2;
+    font-size: $wms-fs-125;
+  }
+
+  button,
+  .el-pager li {
+    background: transparent;
+    color: $wms-text-2;
+    font-size: $wms-fs-125;
+    font-weight: 500;
+    border-radius: $wms-radius-sm;
+    min-width: 28px;
+    height: 28px;
+    line-height: 28px;
+    margin: 0 2px;
+  }
+
+  .el-pager li.active {
+    background: $wms-brand;
+    color: $wms-brand-ink;
+  }
+
+  .el-pager li:hover {
+    color: $wms-brand;
+  }
+
+  .el-pager li.active:hover {
+    color: $wms-brand-ink;
+  }
+}
+
+/* 标签 */
+.el-tag {
+  height: 22px;
+  line-height: 20px;
+  padding: 0 8px;
+  font-size: $wms-fs-125;
+  font-family: $wms-font-body;
+  font-weight: 500;
+  border-radius: $wms-radius;
+}
+
+/* 弹窗 */
+.el-dialog {
+  border-radius: $wms-radius-lg;
+  box-shadow: $wms-shadow-lg;
+  overflow: hidden;
+
+  .el-dialog__header {
+    padding: 18px 24px 14px;
+    border-bottom: 1px solid $wms-border;
+  }
+
+  .el-dialog__title {
+    font-family: $wms-font-heading;
+    font-size: $wms-fs-lg;
+    font-weight: 600;
+    color: $wms-text;
+  }
+
+  .el-dialog__headerbtn {
+    top: 20px;
+    right: 22px;
+  }
+
+  .el-dialog__body {
+    padding: 20px 24px 4px;
+    color: $wms-text;
+    font-size: $wms-fs-base;
+  }
+
+  .el-dialog__footer {
+    padding: 12px 24px 20px;
+    border-top: 1px solid $wms-border;
+  }
+}
+
+.el-dialog__wrapper,
+.el-message-box__wrapper {
+  .el-message-box {
+    border-radius: $wms-radius-lg;
+    padding-bottom: 16px;
+
+    .el-message-box__title {
+      font-family: $wms-font-heading;
+      font-size: $wms-fs-lg;
+      color: $wms-text;
+    }
+
+    .el-message-box__content {
+      font-size: $wms-fs-base;
+      color: $wms-text-2;
+    }
+  }
+}
+
+/* 下拉菜单 */
+.el-dropdown-menu,
+.el-select-dropdown {
+  border-radius: $wms-radius-md;
+  border-color: $wms-border;
+  box-shadow: $wms-shadow;
+
+  .el-dropdown-menu__item,
+  .el-select-dropdown__item {
+    font-size: $wms-fs-base;
+    color: $wms-text;
+    padding: 0 14px;
+    line-height: 32px;
+
+    &:hover {
+      background: $wms-panel-3;
+      color: $wms-brand;
+    }
+
+    &.selected {
+      color: $wms-brand;
+      font-weight: 500;
+    }
+  }
+}
+
+/* 开关 */
+.el-switch.is-checked .el-switch__core {
+  background-color: $wms-brand;
+  border-color: $wms-brand;
+}
+
+/* 卡片 */
+.el-card {
+  border-radius: $wms-radius-md;
+  border-color: $wms-border;
+  box-shadow: none;
+
+  .el-card__header {
+    padding: 16px 20px;
+    border-bottom-color: $wms-border;
+  }
+}
+
+/* 面包屑 */
+.el-breadcrumb {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-sm;
+
+  .el-breadcrumb__inner,
+  .el-breadcrumb__separator {
+    color: $wms-text-3;
+    font-weight: 400;
+
+    &.is-link:hover {
+      color: $wms-brand;
+    }
+  }
+
+  .el-breadcrumb__item:last-child .el-breadcrumb__inner {
+    color: $wms-text;
+    font-weight: 500;
+  }
+}
+
+/* 菜单（用于侧边栏，避免默认样式干扰） */
+.el-menu {
+  border-right: none;
+  background: transparent;
+}
+
+/* 单选 / 复选 */
+.el-radio__input.is-checked .el-radio__inner,
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  background-color: $wms-brand;
+  border-color: $wms-brand;
+}
+
+.el-radio__input.is-checked + .el-radio__label,
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  color: $wms-brand;
+}
+
+/* 树（分配权限） */
+.el-tree {
+  font-family: $wms-font-body;
+  font-size: $wms-fs-base;
+  color: $wms-text;
+
+  .el-tree-node__content {
+    height: 32px;
+  }
+
+  .el-tree-node__content:hover {
+    background: $wms-panel-3;
+  }
+
+  .el-tree-node.is-current > .el-tree-node__content {
+    background: $wms-brand-soft;
+  }
+}
+
+/* Tooltip / Loading */
+.el-tooltip__popper.is-dark {
+  background: $wms-text;
+  border-radius: $wms-radius;
+  font-size: $wms-fs-sm;
+}
+
+.el-loading-mask {
+  background: rgba(245, 244, 241, 0.75);
+}
+
+/* ---------- 4. 通用布局与工具类 ---------- */
+.wms-page {
+  padding: 24px $wms-page-padding 40px;
+  max-width: $wms-content-width;
+  margin: 0 auto;
+}
+
+.wms-card {
+  @include wms-card;
+}
+
+/* 卡片 / 面板头部：左标题 + 右操作 */
+.wms-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $wms-gap;
+  padding: 18px 20px;
+  border-bottom: 1px solid $wms-border;
+
+  .wms-panel-title {
+    display: flex;
+    align-items: center;
+    gap: $wms-gap;
+    font-size: $wms-fs-md;
+    font-weight: 600;
+    color: $wms-text;
+    font-family: $wms-font-body;
+  }
+
+  .wms-panel-subtitle {
+    font-size: $wms-fs-sm;
+    color: $wms-text-3;
+    font-weight: 400;
+  }
+
+  .wms-panel-actions {
+    display: flex;
+    align-items: center;
+    gap: $wms-gap;
+  }
+}
+
+.wms-panel-body {
+  padding: 20px 24px 26px;
+}
+
+/* 页面标题区 */
+.wms-page-title {
+  font-family: $wms-font-heading;
+  font-size: $wms-fs-2xl;
+  font-weight: 600;
+  color: $wms-text;
+}
+
+.wms-page-desc {
+  margin-top: 4px;
+  font-size: $wms-fs-sm;
+  color: $wms-text-3;
+}
+
+.wms-flex {
+  display: flex;
+}
+
+.wms-flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.wms-flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wms-gap-8 {
+  gap: 8px;
+}
+
+.wms-gap-14 {
+  gap: 14px;
+}
+
+.wms-text-muted {
+  color: $wms-text-3;
+}
+
+.wms-text-2 {
+  color: $wms-text-2;
+}
+
+.wms-strong {
+  font-weight: 600;
+}
+
+.wms-mono {
+  font-family: 'Geist Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: $wms-fs-125;
+}
+
+/* 表格行内操作按钮组 */
+.wms-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .el-button--text {
+    font-size: $wms-fs-125;
+  }
+}
+
+/* 列表页底部：分页条 */
+.wms-table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-top: 1px solid $wms-border;
+
+  .wms-footer-info {
+    font-size: $wms-fs-125;
+    color: $wms-text-3;
+  }
+}

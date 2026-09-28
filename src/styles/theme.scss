@@ -1,0 +1,111 @@
+// ============================================================
+// 设计 Token —— 来源于 仓储管理.pen 设计元数据
+// 注意：本文件通过 vue.config.js 的 additionalData 注入到每个 scss 中，
+//      因此只允许存在「变量 / mixin / 函数」，禁止出现任何 CSS 输出，
+//      否则会造成样式重复。
+// 供 CSS 运行时使用的同名自定义属性定义在 styles/index.scss 的 :root 中。
+// ============================================================
+
+// ---------- 基础色 ----------
+$wms-bg: #f5f4f1; // 页面底色
+$wms-panel: #ffffff; // 卡片 / 面板
+$wms-panel-2: #efeee9; // 次级面板（表头、进度槽）
+$wms-panel-3: #f7f6f3; // 三级面板（行悬浮、输入框底）
+$wms-border: #e4e2dc; // 常规描边
+$wms-border-strong: #d3d1ca; // 强调描边
+
+// ---------- 文本色 ----------
+$wms-text: #22252b; // 主文本
+$wms-text-2: #5b6068; // 次级文本
+$wms-text-3: #8b9099; // 弱化文本
+
+// ---------- 品牌色 ----------
+$wms-brand: #35604f;
+$wms-brand-hover: #2a4e40;
+$wms-brand-soft: #e7efeb;
+$wms-brand-ink: #ffffff;
+
+// ---------- 业务语义色 ----------
+$wms-ok: #2f7a55;
+$wms-ok-soft: #e6f1ea;
+$wms-warn: #93661b;
+$wms-warn-soft: #f7efdc;
+$wms-danger: #af4038;
+$wms-danger-soft: #f7e7e5;
+$wms-info: #39618c;
+$wms-info-soft: #e6eef6;
+$wms-neutral: #5b6068;
+$wms-neutral-soft: #ededE9;
+
+// ---------- 侧边导航 ----------
+$wms-nav-bg: #222831;
+$wms-nav-hover: #2b333d;
+$wms-nav-active: #2f3b45;
+$wms-nav-text: #b9c0c7;
+$wms-nav-muted: #7e8894;
+$wms-nav-active-text: #ffffff;
+$wms-nav-accent: #7fb69c;
+$wms-nav-border: #2f3841;
+
+// ---------- 圆角 ----------
+$wms-radius-xs: 3px;
+$wms-radius-sm: 4px;
+$wms-radius: 6px; // 按钮 / 输入框 / 标签（主圆角）
+$wms-radius-md: 8px; // 面板 / 卡片
+$wms-radius-lg: 10px;
+$wms-radius-xl: 11px;
+$wms-radius-2xl: 16px;
+
+// ---------- 间距 ----------
+$wms-gap-2: 2px;
+$wms-gap: 8px; // 设计稿主导间距
+$wms-gap-4: 4px;
+$wms-gap-6: 6px;
+$wms-gap-10: 10px;
+$wms-gap-12: 12px;
+$wms-gap-14: 14px;
+$wms-gap-16: 16px;
+$wms-gap-18: 18px;
+$wms-page-padding: 40px; // 页面外层内边距
+
+// ---------- 字体 ----------
+$wms-font-body: 'Geist', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+$wms-font-heading: 'Playfair Display', 'Geist', 'Songti SC', 'Microsoft YaHei', serif;
+
+// 字号
+$wms-fs-11: 11.5px;
+$wms-fs-sm: 12px;
+$wms-fs-125: 12.5px;
+$wms-fs-base: 13px; // 主导字号
+$wms-fs-135: 13.5px;
+$wms-fs-md: 14px;
+$wms-fs-145: 14.5px;
+$wms-fs-lg: 18px;
+$wms-fs-xl: 22px;
+$wms-fs-2xl: 24px;
+$wms-fs-3xl: 26px;
+$wms-fs-4xl: 30px;
+$wms-fs-5xl: 34px;
+
+// ---------- 阴影 ----------
+$wms-shadow-sm: 0 1px 2px rgba(34, 37, 43, 0.04);
+$wms-shadow: 0 2px 8px rgba(34, 37, 43, 0.06);
+$wms-shadow-lg: 0 8px 24px rgba(34, 37, 43, 0.1);
+
+// ---------- 布局尺寸 ----------
+$wms-sidebar-width: 244px;
+$wms-header-height: 64px;
+$wms-content-width: 1440px;
+
+// ---------- mixin ----------
+@mixin wms-card {
+  background: $wms-panel;
+  border: 1px solid $wms-border;
+  border-radius: $wms-radius-md;
+}
+
+@mixin wms-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

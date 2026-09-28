@@ -1,0 +1,50 @@
+// ============================================================
+// Element-UI 主题变量覆写
+// 用法：main.js 中 import './styles/element-variables.scss'（替代默认 theme-chalk/index.css）
+// 说明：Element-UI 的 theme-chalk 源码变量均使用 !default 定义，
+//      因此在此处先赋值即可全局改变组件主题色、圆角、字号。
+// ============================================================
+
+// ---------- 主色 / 语义色 ----------
+$--color-primary: #35604f;
+$--color-success: #2f7a55;
+$--color-warning: #93661b;
+$--color-danger: #af4038;
+$--color-info: #5b6068;
+
+// 主色衍生色阶（按钮 hover、边框、浅底）
+$--color-primary-light-1: #496f61;
+$--color-primary-light-2: #5d8072;
+$--color-primary-light-3: #729084;
+$--color-primary-light-4: #86a095;
+$--color-primary-light-5: #9ab0a7;
+$--color-primary-light-6: #aebfb9;
+$--color-primary-light-7: #c2cfca;
+$--color-primary-light-8: #d7dfdc;
+$--color-primary-light-9: #ebefed;
+
+// ---------- 文本色 ----------
+$--color-text-primary: #22252b;
+$--color-text-regular: #5b6068;
+$--color-text-secondary: #8b9099;
+$--color-text-placeholder: #8b9099;
+
+// ---------- 边框色 ----------
+$--border-color-base: #d3d1ca;
+$--border-color-light: #e4e2dc;
+$--border-color-lighter: #e4e2dc;
+$--border-color-extra-light: #efeee9;
+
+// ---------- 背景色 ----------
+$--background-color-base: #f7f6f3;
+$--border-radius-base: 6px;
+$--border-radius-small: 4px;
+
+// ---------- 字体 ----------
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+$--font-size-base: 13px;
+$--font-size-small: 12px;
+$--font-size-large: 14px;
+
+// 一次性编译出整套 Element-UI 主题
+@import '~element-ui/packages/theme-chalk/src/index';
