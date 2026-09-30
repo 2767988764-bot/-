@@ -13,14 +13,14 @@ module.exports = defineConfig({
   devServer: {
     port: 8080,
     open: true,
-    // 【后端接口就绪后】放开下面的代理配置，并把 src/utils/request.js 的 baseURL 改为 '/api'
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://localhost:9090',
-    //     changeOrigin: true,
-    //     pathRewrite: { '^/api': '' }
-    //   }
-    // }
+    // 开发环境代理：/api 转发到本地 FastAPI 后端（已启用）
+    proxy: {
+      '/api': {
+        target: 'http://localhost:9090',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' }
+      }
+    },
     historyApiFallback: true
   },
   css: {

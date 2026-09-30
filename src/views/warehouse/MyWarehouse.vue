@@ -11,9 +11,38 @@
         <el-button @click="resetLedger">重置</el-button>
       </template>
       <template #actions>
+        <el-button type="primary" icon="el-icon-plus" @click="openAdd">新建仓库</el-button>
         <el-button icon="el-icon-refresh" @click="loadWarehouses">刷新仓库</el-button>
       </template>
     </SearchFilterBar>
+    <ModalForm :visible.sync="dialogVisible" :title="dialogTitle" :model="form" :rules="rules" width="520px" @submit="handleSubmit">
+      <el-form-item label="仓库编码" prop="code">
+        <el-input v-model="form.code" placeholder="请输入仓库编码" />
+      </el-form-item>
+      <el-form-item label="仓库名称" prop="name">
+        <el-input v-model="form.name" placeholder="请输入仓库名称" />
+      </el-form-item>
+      <el-form-item label="仓库类型" prop="type">
+        <el-select v-model="form.type" placeholder="请选择仓库类型" style="width:100%">
+          <el-option v-for="t in WAREHOUSE_TYPES" :key="t" :label="t" :value="t" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="总面积" prop="totalArea">
+        <el-input-number v-model="form.totalArea" :min="0" :precision="2" :step="100" controls-position="right" style="width:100%" />
+      </el-form-item>
+      <el-form-item label="已用面积" prop="usedArea">
+        <el-input-number v-model="form.usedArea" :min="0" :precision="2" :step="10" controls-position="right" style="width:100%" />
+      </el-form-item>
+      <el-form-item label="地址" prop="address">
+        <el-input v-model="form.address" placeholder="请输入仓库地址" />
+      </el-form-item>
+      <el-form-item label="负责人" prop="manager">
+        <el-input v-model="form.manager" placeholder="请输入负责人" />
+      </el-form-item>
+      <el-form-item label="联系电话" prop="phone">
+        <el-input v-model="form.phone" placeholder="请输入联系电话" />
+      </el-form-item>
+    </ModalForm>
     <div v-loading="whLoading" class="wh-grid">
       <div v-for="item in warehouses" :key="item.id" class="wh-card">
         <div class="wh-card-head">
@@ -79,13 +108,14 @@
  */
 import * as echarts from 'echarts'
 import SearchFilterBar from '@/components/SearchFilterBar.vue'
+import ModalForm from '@/components/ModalForm.vue'
 import StatusTag from '@/components/StatusTag.vue'
-import { getAllWarehouses } from '@/api/warehouse'
+import { getAllWarehouses, addWarehouse, WAREHOUSE_TYPES } from '@/api/warehouse'
 import { getStockLedger } from '@/api/stock'
 
 export default {
   name: 'MyWarehouse',
-  components: { SearchFilterBar, StatusTag },
+  components: { SearchFilterBar, ModalForm, StatusTag },
   data() {
     return {
       whLoading: false,
@@ -94,7 +124,16 @@ export default {
       usageCharts: [],
       ledger: [],
       total: 0,
-      query: { keyword: '', page: 1, pageSize: 10 }
+      query: { keyword: '', page: 1, pageSize: 10 },
+      dialogVisible: false,
+      dialogTitle: '新建仓库',
+      WAREHOUSE_TYPES,
+      form: this.buildForm(),
+      rules: {
+        code: [{ required: true, message: '请输入仓库编码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入仓库名称', trigger: 'blur' }],
+        type: [{ required: true, message: '请选择仓库类型', trigger: 'change' }]
+      }
     }
   },
   computed: {
@@ -116,6 +155,23 @@ export default {
     this.disposeUsageCharts()
   },
   methods: {
+    buildForm() {
+      return { id: null, code: '', name: '', type: '', totalArea: 0, usedArea: 0, address: '', manager: '', phone: '' }
+    },
+    openAdd() {
+      this.dialogTitle = '新建仓库'
+      this.form = this.buildForm()
+      this.dialogVisible = true
+    },
+    handleSubmit(done) {
+      addWarehouse(this.form)
+        .then(() => {
+          this.$message.success('仓库创建成功')
+          done()
+          this.loadWarehouses()
+        })
+        .catch(() => done())
+    },
     async loadWarehouses() {
       this.whLoading = true
       try {

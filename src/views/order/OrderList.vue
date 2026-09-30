@@ -214,9 +214,10 @@ import {
   deleteOrder,
   shipOrder,
   PAY_STATUS,
-  SHIP_STATUS
+  SHIP_STATUS,
+  CUSTOMERS,
+  PRODUCTS
 } from '@/api/order'
-import { CUSTOMERS, PRODUCTS } from '@/mock/order'
 import { footerText } from '@/mock/helper'
 
 export default {

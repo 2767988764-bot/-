@@ -6,11 +6,6 @@
  * 【后端接口就绪后，替换此处为真实axios请求】
  */
 import request from '@/utils/request'
-import {
-  mockGetProfile,
-  mockUpdateProfile,
-  mockChangePassword
-} from '@/mock/profile'
 
 /**
  * 获取当前登录人个人资料
@@ -27,9 +22,8 @@ import {
  * }>}
  */
 export function getProfile() {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/system/profile', method: 'get' })
-  return mockGetProfile()
+  // 真实请求：GET /system/profile
+  return request({ url: '/system/profile', method: 'get' })
 }
 
 /**
@@ -42,9 +36,8 @@ export function getProfile() {
  * @returns {Promise<Object>} 修改后的用户对象
  */
 export function updateProfile(data) {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/system/profile', method: 'put', data })
-  return mockUpdateProfile(data)
+  // 真实请求：PUT /system/profile
+  return request({ url: '/system/profile', method: 'put', data })
 }
 
 /**
@@ -56,7 +49,7 @@ export function updateProfile(data) {
  *          后端业务逻辑：原密码校验失败 → success=false
  */
 export function changePassword(data) {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/system/profile/password', method: 'put', data })
-  return mockChangePassword(data)
+  // 真实请求：PUT /system/profile/password
+  // 后端成功返回 data:{success:true}，与组件 res.success 判断对齐
+  return request({ url: '/system/profile/password', method: 'put', data })
 }

@@ -10,10 +10,7 @@ import {
   mockAddUser,
   mockAssignRoles,
   mockDeleteUser,
-  mockGetUserInfo,
   mockGetUserList,
-  mockLogin,
-  mockLogout,
   mockToggleUserStatus,
   mockUpdateUser,
   roleOptions
@@ -117,9 +114,8 @@ export function getUserRoleOptions() {
  * @returns {Promise<{token: string, username: string, role: string}>}
  */
 export function login(data) {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/auth/login', method: 'post', data })
-  return mockLogin(data)
+  // 真实请求：POST /auth/login，前置代理 /api → 后端 9090
+  return request({ url: '/auth/login', method: 'post', data })
 }
 
 /**
@@ -127,9 +123,8 @@ export function login(data) {
  * @returns {Promise<{name: string, username: string, avatar: string, role: string, roles: Array<string>, permissions: Array<string>}>}
  */
 export function getUserInfo() {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/auth/info', method: 'get' })
-  return mockGetUserInfo()
+  // 真实请求：GET /auth/info，返回 { name, username, avatar, role, permissions }
+  return request({ url: '/auth/info', method: 'get' })
 }
 
 /**
@@ -137,7 +132,6 @@ export function getUserInfo() {
  * @returns {Promise<boolean>}
  */
 export function logout() {
-  // 【后端接口就绪后，替换此处为真实axios请求】
-  // return request({ url: '/auth/logout', method: 'post' })
-  return mockLogout()
+  // 真实请求：POST /auth/logout
+  return request({ url: '/auth/logout', method: 'post' })
 }
